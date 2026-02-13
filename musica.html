@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Momento🤎</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a002a, #4b0082, #7b2cbf);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .player-container {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .controls {
+            margin-top: 10px;
+        }
+
+        button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #song-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Me prometo no decepcionarte🤎✨</h1>
+
+    <p>
+        Gracias por aceptar ir conmigo, esto es algo que siempre soñé.
+        Gracias por estar ahí, gracias por aguantar tantas tonterías
+        y metidas de pata que pongo, realmente gracias por descubrir esa 
+        parte de mí que tanto miedo tenía a mostrar. Por el momento 
+        sé que parezco que me disculpo mucho, pero eso lo hago porque me
+        haces muy feliz.
+    </p>
+
+    <p>
+        Este será solo uno de muchos momentos hermosos juntos que vamos
+        a disfrutar, y será el inicio de muchos viajes juntos💕.
+    </p>
+
+    <div class="player-container">
+        <div id="song-title">🎵 Cargando canción...</div>
+
+        <audio id="player" controls></audio>
+
+        <div class="controls">
+            <button onclick="cambiar(-1)">⏮ Anterior</button>
+            <button onclick="cambiar(1)">Siguiente ⏭</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var playlist = [
+        {
+            src: "Musica/quedate.mp3",
+            titulo: "Quédate - Manuel Medrano"
+        },
+        {
+            src: "Musica/solamente-tu.mp3",
+            titulo: "Solamente Tú - Pablo Alborán"
+        },
+        {
+            src: "Musica/cuando-me-enamoro.mp3",
+            titulo: "Cuando Me Enamoro - Enrique Iglesias"
+        }
+    ];
+
+    var indice = 0;
+    var player = document.getElementById("player");
+    var titulo = document.getElementById("song-title");
+
+    function cargar(i) {
+        if (i < 0) {
+            indice = playlist.length - 1;
+        } else if (i >= playlist.length) {
+            indice = 0;
+        } else {
+            indice = i;
+        }
+
+        player.src = playlist[indice].src;
+        titulo.innerText = "🎵 " + playlist[indice].titulo;
+        player.play();
+    }
+
+    function cambiar(direccion) {
+        cargar(indice + direccion);
+    }
+
+    player.addEventListener("ended", function() {
+        cambiar(1);
+    });
+
+    cargar(0);
+
+</script>
+
+</body>
+</html>
