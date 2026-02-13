@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para My Princess🤎</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #2e003e, #5e2b97, #8a2be2);
+        color: white;
+        text-align: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Evita barras de desplazamiento */
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px rgba(0,0,0,0.4);
+        width: 90%;
+        max-width: 500px;
+        /* IMPORTANTE: Esto mantiene al botón dentro de la tarjeta */
+        position: relative; 
+        min-height: 400px; /* Altura mínima para que el botón tenga espacio para moverse */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+
+    .btn-container {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 60px; /* Espacio reservado para los botones */
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 1.1em;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 10;
+    }
+
+    #yesBtn {
+        background: #d291ff;
+        color: #2e003e;
+    }
+
+    #yesBtn:hover {
+        background: #c06cff;
+        transform: scale(1.05);
+    }
+
+    #noBtn {
+        background: white;
+        color: #5e2b97;
+        /* Quitamos absolute de aquí para que inicie centrado */
+    }
+</style>
+</head>
+<body>
+
+<div class="card" id="cardContainer">
+    <h1>My future Wife🤎</h1>
+    <p>
+        Walquida Brito Heredia, perdonarías a este pobre
+        hombre idiota y muchísimas cosas más. Te quiero✨.
+    </p>
+    <p>
+        ¿Aceptarías ir conmigo a la Basílica de Higüey? 💖
+    </p>
+
+    <div class="btn-container">
+        <button id="yesBtn" onclick="ir()">Sí, quiero ir contigo🤎</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const card = document.getElementById("cardContainer");
+
+noBtn.addEventListener("mouseover", function() {
+    // Hacemos el botón absoluto para que pueda moverse libremente
+    noBtn.style.position = "absolute";
+
+    // Calculamos el espacio disponible dentro de la tarjeta
+    // Restamos el tamaño del botón para que no se salga por los bordes
+    const cardRect = card.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = cardRect.width - btnRect.width - 40; // 40px de margen de seguridad (padding)
+    const maxY = cardRect.height - btnRect.height - 40;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    // Aplicamos las nuevas coordenadas
+    // Como la tarjeta tiene position: relative, left y top son relativos a ella
+    // Sumamos 20px para compensar el padding de la tarjeta
+    noBtn.style.left = (randomX + 20) + "px"; 
+    noBtn.style.top = (randomY + 20) + "px";
+});
+
+// Soporte para móviles (toque en vez de mouseover)
+noBtn.addEventListener("touchstart", function(e) {
+    e.preventDefault(); // Evita que se haga click
+    const cardRect = card.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+    
+    noBtn.style.position = "absolute";
+    const maxX = cardRect.width - btnRect.width - 40;
+    const maxY = cardRect.height - btnRect.height - 40;
+    
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    
+    noBtn.style.left = (randomX + 20) + "px"; 
+    noBtn.style.top = (randomY + 20) + "px";
+});
+
+function ir() {
+    window.location.href = "musica.html";
+}
+</script>
+
+</body>
+</html>
