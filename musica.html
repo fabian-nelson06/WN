@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestro Momento🤎</title>
+    <title>Nuestro Momento 🤎</title>
 
     <style>
         body {
@@ -79,20 +79,18 @@
 <body>
 
 <div class="card">
-    <h1>Me prometo no decepcionarte🤎✨</h1>
+    <h1>Me prometo no decepcionarte 🤎✨</h1>
 
     <p>
         Gracias por aceptar ir conmigo, esto es algo que siempre soñé.
         Gracias por estar ahí, gracias por aguantar tantas tonterías
-        y metidas de pata que pongo, realmente gracias por descubrir esa 
-        parte de mí que tanto miedo tenía a mostrar. Por el momento 
-        sé que parezco que me disculpo mucho, pero eso lo hago porque me
-        haces muy feliz.
+        y metidas de pata que pongo. Realmente gracias por descubrir esa 
+        parte de mí que tanto miedo tenía a mostrar.
     </p>
 
     <p>
         Este será solo uno de muchos momentos hermosos juntos que vamos
-        a disfrutar, y será el inicio de muchos viajes juntos💕.
+        a disfrutar, y será el inicio de muchos viajes juntos 💕.
     </p>
 
     <div class="player-container">
@@ -129,6 +127,7 @@
     var titulo = document.getElementById("song-title");
 
     function cargar(i) {
+
         if (i < 0) {
             indice = playlist.length - 1;
         } else if (i >= playlist.length) {
@@ -139,15 +138,21 @@
 
         player.src = playlist[indice].src;
         titulo.innerText = "🎵 " + playlist[indice].titulo;
-        player.play();
     }
 
     function cambiar(direccion) {
         cargar(indice + direccion);
+        player.play().catch(function() {
+            console.log("El navegador bloqueó autoplay.");
+        });
     }
 
     player.addEventListener("ended", function() {
         cambiar(1);
+    });
+
+    player.addEventListener("error", function() {
+        titulo.innerText = "⚠ Error: revisa el nombre o la ubicación del archivo.";
     });
 
     cargar(0);
@@ -156,4 +161,5 @@
 
 </body>
 </html>
+
 
